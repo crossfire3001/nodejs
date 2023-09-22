@@ -6,8 +6,7 @@ const cssmin = require('gulp-cssmin');
 const rename = require('gulp-rename');
 const concatCss = require('gulp-concat-css');
 
-
-function defaultTask() {
+exports.sass = function () {
     return gulp.src('./src/styles/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(concatCss("style.css"))
@@ -16,4 +15,6 @@ function defaultTask() {
         .pipe(gulp.dest('./dist'));
 }
 
-exports.default = defaultTask
+exports.watch = function () {
+    gulp.watch('./src/styles/*.scss', gulp.series('sass'));
+};
